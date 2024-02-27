@@ -6,6 +6,7 @@
 stm_lms_register_style('user-quizzes');
 stm_lms_register_style('user-certificates');
 $completed = stm_lms_get_user_completed_courses($current_user['id'], array(), -1);
+
 stm_lms_register_script('affiliate_points');
 
 stm_lms_register_style('affiliate_points');
@@ -62,7 +63,7 @@ $table_name = $wpdb->prefix . 'usermeta';
         $results = $wpdb->get_results($query);
         ?>
 
-        <?php if ($order_id): ?>
+        <?php if ($order_id || !$order_id): ?>
             <div class="stm-lms-user-quizzes stm-lms-user-certificates">
 
                 <div class="stm-lms-user-quiz">
