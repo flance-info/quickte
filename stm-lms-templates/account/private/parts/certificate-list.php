@@ -21,7 +21,7 @@ if (!empty($completed)) { ?>
     <?php
     if (class_exists('STM_LMS_Certificate_Builder')) {
         wp_register_script('jspdf', STM_LMS_URL . '/assets/vendors/jspdf.umd.js', array(), stm_lms_custom_styles_v());
-        wp_enqueue_script('stm_generate_certificate', get_stylesheet_directory_uri() . '/assets/js/generate_certificate.js', array('jspdf', 'stm_certificate_fonts'), stm_lms_custom_styles_v());
+        wp_enqueue_script('stm_generate_certificate', get_stylesheet_directory_uri() . '/assets/js/generate_certificate.js', array('jspdf', 'stm_certificate_fonts'), time());
     }
     ?>
     <div class="stm-lms-user-quizzes stm-lms-user-certificates">
@@ -61,6 +61,14 @@ $table_name = $wpdb->prefix . 'usermeta';
             AND meta_key IN ('rw1pmpsu91', 'he7zifr8vw')",
             $user_id);
         $results = $wpdb->get_results($query);
+		$postmetas = get_post_meta( $course_id);
+
+			$price             = get_post_meta( $course_id, 'price', true );
+			$sale_price        = STM_LMS_Course::get_sale_price( $course_id );
+			if ( empty( $price ) && ! empty( $sale_price ) ) {
+				$price      = $sale_price;
+			}
+
         ?>
 
         <?php if ($order_id || !$order_id): ?>
@@ -76,7 +84,7 @@ $table_name = $wpdb->prefix . 'usermeta';
                     <a href="#"
                        data-id="<?= esc_attr($data_id) ?>"
                        data-course_id="<?= esc_attr($course_id) ?>"
-                       fiscal-code="<?= esc_attr($results[0]->meta_value) ?>"
+                      	<?php if ($price): ?>  fiscal-code="<?= esc_attr($results[0]->meta_value) ?>" <?php endif; ?>
                        data-student-name="<?= esc_attr($results[1]->meta_value) ?>"
                        certificate-code="<?= esc_attr($user_certificate_code) ?>"
                        started="<?= esc_attr($course['start_time']) ?>"
@@ -86,7 +94,7 @@ $table_name = $wpdb->prefix . 'usermeta';
                 </div>
 
                 <div style="display: flex; gap: 10px; flex-wrap: wrap">
-
+					<?php if ($price): ?>
                     <div class="affiliate_points heading_font"
                          data-copy="<?php echo esc_attr($results[0]->meta_value); ?>">
                         <span class="hidden" id="<?php echo esc_attr($results[0]->meta_value); ?>">
@@ -99,7 +107,7 @@ $table_name = $wpdb->prefix . 'usermeta';
                             </span>
                         </span>
                     </div>
-
+					<?php endif; ?>
                     <div class="affiliate_points heading_font"
                          data-copy="<?php echo esc_attr($user_certificate_code); ?>">
                         <span class="hidden"

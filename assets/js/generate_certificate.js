@@ -36,6 +36,12 @@ function getCertificateChild(id, courseId, student_name, certificate_code, fisca
                 console.log(data.data )
                 data.data.fields[1].content = student_name
                 data.data.fields[11].content = formattedDate
+
+                if (fiscal_code) {
+                    data.data.fields[15].content = fiscal_code
+                } else {
+                    data.data.fields[14].content = '';
+                }
                 data.data.fields[15].content = fiscal_code
                 data.data.fields[17].content = certificate_code
 
