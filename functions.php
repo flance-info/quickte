@@ -90,4 +90,11 @@ function display_category_logo_shortcode() {
 
 // Registra lo shortcode
 add_shortcode('category_logo', 'display_category_logo_shortcode');
+
+
+add_action('init', 'stm_send_certificate_oncompletion');
+
+function stm_send_certificate_oncompletion() {
+  include_once 'inc/STM_LMS_User_Manager_Course_User_Child.php';
+}
 ?>
