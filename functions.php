@@ -96,7 +96,6 @@ add_action( 'init', 'stm_send_certificate_oncompletion' );
 function stm_send_certificate_oncompletion() {
 	include_once 'inc/STM_LMS_User_Manager_Course_User_Child.php';
 	include_once 'inc/STM_LMS_Update_settings.php';
-	include_once 'inc/STM_LMS_addons.php';
 }
 
 ?>
