@@ -11,13 +11,8 @@ class STM_LMS_Update_settings {
 
 	public static function init() {
 		add_action( 'masterstudy_lms_course_saved', array( self::class, 'course_saved' ), 10, 2 );
-		$plugin = new \MasterStudy\Lms\Plugin(); // Instantiate the plugin
-		self::register( $plugin );
 	}
 
-	public static function register( \MasterStudy\Lms\Plugin $plugin ): void {
-		$plugin->get_router()->load_routes( __DIR__ . '/routes.php' );
-	}
 
 	public static function course_saved( $post_id, $course ) {
 		foreach ( self::FIELDS_META_MAPPING as $property => $meta_key ) {
