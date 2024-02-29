@@ -62,9 +62,11 @@ class STM_LMS_User_Manager_Course_User_Child {
 			$passing_grade = intval( STM_LMS_Options::get_option( 'certificate_threshold', 70 ) );
 			$user_grade    = intval( $response['progress_percent'] );
 			$transient_key = 'certificate_email_sent_' . $user_id . '_' . $course_id;
+
 			if ( $user_grade < $passing_grade ) {
 				delete_transient( $transient_key );
 			} else {
+
 				$user         = STM_LMS_User::get_current_user( $user_id );
 				$course_title = get_the_title( $course_id );
 				$name         = $user['login'];
@@ -76,6 +78,8 @@ class STM_LMS_User_Manager_Course_User_Child {
 				);
 				// Check if the email has already been sent
 				if ( false === get_transient( $transient_key ) ) {
+
+
 					STM_LMS_Helpers::send_email( $user['email'], "Your Certificate for Course {$course_title}", $message, 'stm_lms_certificate_available_for_user', compact( 'name', 'course_title' ) );
 					// Set transient to mark that the email has been sent
 					set_transient( $transient_key, 'sent', YEAR_IN_SECONDS ); // Adjust the expiration time as needed
