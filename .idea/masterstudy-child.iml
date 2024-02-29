@@ -9,5 +9,6 @@
     <orderEntry type="module" module-name="masterstudy-elementor-widgets" />
     <orderEntry type="module" module-name="masterstudy-lms-learning-management-system-pro" />
     <orderEntry type="module" module-name="stm-lms-custom" />
+    <orderEntry type="module" module-name="masterstudy-lms-learning-management-system-source" />
   </component>
 </module>

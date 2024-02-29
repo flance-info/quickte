@@ -62,7 +62,7 @@ foreach ( $courses as $course ) {
 						if ( $course_date_timestamp ) {
 							echo esc_html__( 'Course Date: ', 'masterstudy-child' );
 							if ( ! empty( $course_date_timestamp )) {
-								$course_date = date_i18n( 'd/m/Y', strtotime( $course_date_timestamp ) );
+								$course_date = date_i18n( 'd/m/Y',$course_date_timestamp/1000  );
 								echo esc_html( $course_date );
 							}
 						}
