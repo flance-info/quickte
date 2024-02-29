@@ -96,5 +96,33 @@ add_action('init', 'stm_send_certificate_oncompletion');
 
 function stm_send_certificate_oncompletion() {
   include_once 'inc/STM_LMS_User_Manager_Course_User_Child.php';
+  include_once 'inc/STM_LMS_Update_settings.php';
 }
+
+	 function override_course_settings_route() {
+
+		register_rest_route(
+			'masterstudy-lms/v2',
+			'/courses/(?P<course_id>\d+)/settings',
+			array(
+				'methods'             => 'GET',
+				'callback'            => 'custom_course_settings_callback' ,
+				'permission_callback' => '__return_true'
+			)
+		);
+	}
+
+	 function custom_course_settings_callback( $data ) {
+		$course_id = $data['course_id'];
+
+		$settings = array(
+			'setting1' => 'value1',
+			'setting2' => 'value2',
+		);
+
+		return rest_ensure_response( $settings );
+	}
+
+	add_action( 'rest_api_init',  'override_course_settings_route'  );
+
 ?>
