@@ -1,4 +1,5 @@
 <?php
+require_once 'STM_LMS_Update_settings.php';
 
 add_filter(
 	'masterstudy_lms_plugin_addons',
