@@ -1,4 +1,4 @@
-<?php if ($order_id): ?>
+<?php //if ($order_id): ?>
     <h1 class="success-certificate">
         <?php esc_html_e('Click button below in order to emit certificate', 'masterstudy-lms-learning-management-system') ?>
     </h1>
@@ -38,7 +38,7 @@
             <?php esc_html_e('Download', 'masterstudy-lms-learning-management-system'); ?>
         </button>
     </div>
-<?php endif; ?>
+<?php // endif; ?>
 
 <style>
     .success-certificate {

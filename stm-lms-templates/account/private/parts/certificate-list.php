@@ -84,7 +84,7 @@ $table_name = $wpdb->prefix . 'usermeta';
                     <a href="#"
                        data-id="<?= esc_attr($data_id) ?>"
                        data-course_id="<?= esc_attr($course_id) ?>"
-                      	<?php if ($price): ?>  fiscal-code="<?= esc_attr($results[0]->meta_value) ?>" <?php endif; ?>
+                      	<?php if ( $price || !$price ): ?>  fiscal-code="<?= esc_attr($results[0]->meta_value) ?>" <?php endif; ?>
                        data-student-name="<?= esc_attr($results[1]->meta_value) ?>"
                        certificate-code="<?= esc_attr($user_certificate_code) ?>"
                        started="<?= esc_attr($course['start_time']) ?>"
@@ -94,7 +94,7 @@ $table_name = $wpdb->prefix . 'usermeta';
                 </div>
 
                 <div style="display: flex; gap: 10px; flex-wrap: wrap">
-					<?php if ($price): ?>
+					<?php if ($price || !$price): ?>
                     <div class="affiliate_points heading_font"
                          data-copy="<?php echo esc_attr($results[0]->meta_value); ?>">
                         <span class="hidden" id="<?php echo esc_attr($results[0]->meta_value); ?>">

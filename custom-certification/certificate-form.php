@@ -18,6 +18,7 @@
 
 <?php
 $user_id = sanitize_text_field($_POST['userID']);
+$selected_course_id = sanitize_text_field($_POST['selected_course_id']);
 $nonce = sanitize_text_field($_POST['nonce']);
 $customer_orders = wc_get_orders(array(
     'customer' => $user_id,
@@ -32,8 +33,10 @@ $completed = stm_lms_get_user_completed_courses($user_id, array(), -1);
 
 if (!empty($completed)) {
     foreach ($completed as $key => $course) {
+
         $data_id = sanitize_text_field($course['user_course_id']);
         $course_id = sanitize_text_field($course['course_id']);
+
         $started = sanitize_text_field($course['start_time']);
         $user_certificate_code = "$user_id$started-$course_id$data_id";
         $order_id = $customer_orders[$key] ? $customer_orders[$key]->get_id() : '';
@@ -47,7 +50,8 @@ if (!empty($completed)) {
             AND meta_key IN ('rw1pmpsu91', 'he7zifr8vw')",
             $user_id);
         $results = $wpdb->get_results($query);
-        require 'success-template.php';
+
+		if ($selected_course_id == $course_id)  require 'success-template.php';
     }
 }
 ?>

@@ -100,6 +100,7 @@
                             >
                                 <input type="hidden" name="action" value="custom_form_action">
                                 <input type="hidden" name="userID" :value="list.user_id">
+								<input type="hidden" name="selected_course_id" :value="id">
                                 <input type="hidden" name="nonce" :value="stm_lms_nonces.stm_get_certificate">
                                 <input
                                         style="padding: 10px 20px;
